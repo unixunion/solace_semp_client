@@ -5,7 +5,7 @@ if [ -d "venv" ]; then
 else
   echo "creating python virtualenv"
   virtualenv venv --python=python3
-  source venv/bin/activate
+  . venv/bin/activate
   pip install -r requirements.txt
 fi
 
