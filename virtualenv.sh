@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-apt-get update && apt-get -y install python-virtualenv
+apt-get update && apt-get -y install python3-virtualenv
 
 cd /src
 
