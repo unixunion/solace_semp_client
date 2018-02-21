@@ -1,8 +1,0 @@
-version: "2.1"
-
-services:
-    openapi:
-        container_name: openapi_builder
-        build: .
-        volumes:
-          - ./output:/tmp/output
