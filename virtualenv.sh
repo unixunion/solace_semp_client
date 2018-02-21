@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
+apt-get update && apt-get -y install python-virtualenv
+
 if [ -d "venv" ]; then
   echo "found python virtualenv"
 else
   echo "creating python virtualenv"
-  virtualenv venv --python=python3
-  . venv/bin/activate
+  virtualenv venv
+  source venv/bin/activate
   pip install -r requirements.txt
 fi
 
