@@ -2,6 +2,8 @@
 
 apt-get update && apt-get -y install python-virtualenv
 
+cd /src
+
 if [ -d "venv" ]; then
   echo "found python virtualenv"
 else
