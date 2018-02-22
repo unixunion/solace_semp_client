@@ -1,10 +1,10 @@
 # Solace Semp Client
 
-This tool builds API Clients from OpenAPI specifications.
+This tool builds API Clients from OpenAPI specifications using the Codegen container.
 
 ## Building
 
-### Config
+### Configuring Codegen
 
 Download the latest Appliance sempv2 OpenAPI spec from sftp.solacesystems.com, place
 it in `config/semp-v2-swagger-config.yaml`
@@ -20,11 +20,8 @@ the version and naming them `config-java.json` and `config-python.json` respecti
       -l python \
       -i /src/config/semp-v2-swagger-config.yaml \
       -o /src/output/python
-    cd output/python
-    virtualenv venv
-    source venv/bin/activate
-    pip install -r requirements.txt
-    python setup.py ...
+    docker run -t -v `pwd`:/src python:2.7-slim /src/venv-wrapper.sh "cd /src/output/python && python setup.py bdist_wheel --universal"
+
 
 ### Java
 
@@ -35,7 +32,7 @@ the version and naming them `config-java.json` and `config-python.json` respecti
       -i /src/config/semp-v2-swagger-config.yaml \
       -o /src/output/java
     cd output/java
-    mvn clean package install
+    mvn clean / package / install / deploy
 
 ## Generator Config
 
