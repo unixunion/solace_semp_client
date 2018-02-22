@@ -57,7 +57,8 @@ If required, you can build a java version too.
 
 ## Generator Config
 
-You can find generator config parameters with:
+If you need to adjust the config for codegen, you can find generator configurable
+parameters with:
 
     docker run -ti swaggerapi/swagger-codegen-cli:v2.3.1 config-help -l python
     docker run -ti swaggerapi/swagger-codegen-cli:v2.3.1 config-help -l java
