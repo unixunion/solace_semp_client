@@ -1,8 +1,6 @@
 # Solace Semp Client
 
-This tool builds API Clients from OpenAPI specifications using the Codegen container.
-
-
+Build the Solace Sempv2 API Client from OpenAPI Specifications.
 
 ## Building
 

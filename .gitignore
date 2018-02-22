@@ -1,4 +1,6 @@
 output/
+config-java.json
+config-python.json
 config.json
 __pycache__/**
 *.pyc
