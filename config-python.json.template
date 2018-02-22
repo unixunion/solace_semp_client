@@ -1,5 +1,6 @@
 {
   "projectName": "solace_semp_client",
   "packageName": "solace_semp_client",
-  "packageVersion": "__VERSION__"
+  "packageVersion": "__VERSION__",
+  "packageUrl": "https://bitbucket.unibet.com/bitbucket/scm/bds/solace_semp_client.git"
 }
