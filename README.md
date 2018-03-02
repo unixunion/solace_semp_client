@@ -16,8 +16,6 @@ There is a pipeline
 The pipeline should automatically pick up the change, run codegen, compile the
 python code and release it to artifactory.
 
-https://go-cd.arch.aws.unibet.com/go/tab/pipeline/history/SolaceSempClient-OpenAPIGenerate
-
 
 ## Manually
 
@@ -40,6 +38,10 @@ Build the python wheel.
 
 You can now find the Wheel file in output/python/dist/
 
+Building and uploading to PyPi
+
+    docker run -e LOCAL_USER_ID -e LOCAL_GROUP_ID -e ACTION=deploy -e LOCAL_PYPI_USER -e LOCAL_PYPI_PASS -v `pwd`/output/python:/application docker.kindredgroup.com/kindred/build-image-python27:latest
+
 ### Java
 
 If required, you can build a java version too.
@@ -52,6 +54,16 @@ If required, you can build a java version too.
       -o /src/output/java
     cd output/java
     mvn clean / package / install / deploy
+
+### Go
+
+    cat config-go.json.template | sed 's/__VERSION__/0.0.1/' > config-go.json
+    docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:latest generate \
+      --config /src/config-go.json \
+      -l go \
+      -i /src/config/semp-v2-swagger-config.yaml \
+      -o /src/output/go
+    cd output/go
 
 ## Generator Config
 
