@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# This runs inside a python:2.7 container ensure a virtualenv is setup
+# This runs inside a python-slim container ensure a virtualenv is setup
 # and sources before building the codegen produced code.
 
 apt-get update && apt-get -y install python-virtualenv
