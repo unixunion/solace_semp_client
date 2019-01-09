@@ -38,9 +38,6 @@ Build the python wheel.
 
 You can now find the Wheel file in output/python/dist/
 
-Building and uploading to PyPi
-
-    docker run -e LOCAL_USER_ID -e LOCAL_GROUP_ID -e ACTION=deploy -e LOCAL_PYPI_USER -e LOCAL_PYPI_PASS -v `pwd`/output/python:/application docker.kindredgroup.com/kindred/build-image-python27:latest
 
 ### Java
 
