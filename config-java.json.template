@@ -1,6 +1,6 @@
 {
   "artifactDescription": "Solace SEMPv2 Client",
-  "groupId": "com.kindred.bds",
+  "groupId": "com.myorg.bds",
   "artifactId": "solace_semp_client",
   "artifactVersion": "__VERSION__"
 }

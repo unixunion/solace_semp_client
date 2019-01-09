@@ -7,7 +7,7 @@ Build the Solace Sempv2 API Client from OpenAPI Specifications.
 ### Updating Semp API
 
 Download the appropriate version of the appliance sempv2 OpenAPI spec from sftp.solacesystems.com, place
-it in `config/__VERSION__/semp-v2-swagger-config.yaml` 
+it in `config/__VERSION__/semp-v2-swagger-config.yaml`
 
 ### Pipeline
 
