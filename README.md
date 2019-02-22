@@ -9,7 +9,6 @@ Build the Solace Sempv2 API Client from OpenAPI Specifications.
 Download the appropriate version of the appliance sempv2 OpenAPI spec from sftp.solacesystems.com, place
 it in `config/__VERSION__/semp-v2-swagger-config.yaml`
 
-
 ## Manually
 
 ### Configuring Codegen
@@ -22,7 +21,7 @@ the version and naming them `config-java.json` and `config-python.json` respecti
 Build the python wheel.
 
     cat config-python.json.template | sed 's/__VERSION__/8.3.0.32/' > config-python.json
-    docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.0 generate \
+    docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.2 generate \
       --config /src/config-python.json \
       -l python \
       -i /src/config/8.3.0.32/semp-v2-swagger-config.yaml \
@@ -40,7 +39,7 @@ You can now find the Wheel file in output/python/dist/
 If required, you can build a java version too.
 
     cat config-java.json.template | sed 's/__VERSION__/8.3.0.32/' > config-java.json
-    docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.0 generate \
+    docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.2 generate \
       --config /src/config-java.json \
       -l java \
       -i /src/config/8.3.0.32/semp-v2-swagger-config.yaml \
@@ -51,12 +50,22 @@ If required, you can build a java version too.
 ### Go
 
     cat config-go.json.template | sed 's/__VERSION__/8.3.0.32/' > config-go.json
-    docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:latest generate \
+    docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.2 generate \
       --config /src/config-go.json \
       -l go \
       -i /src/config/8.3.0.32/semp-v2-swagger-config.yaml \
       -o /src/output/go
     cd output/go
+
+### Rust
+
+    cat config-rust.json.template | sed 's/__VERSION__/9.0.0.17/' > config-rust.json
+    docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.2 generate \
+      --config /src/config-rust.json \
+      -l rust \
+      -i /src/config/9.0.0.17/semp-v2-swagger-config.yaml \
+      -o /src/output/rust
+    cd output/rust
 
 ## Generating Documentation
 
@@ -67,5 +76,6 @@ If required, you can build a java version too.
 If you need to adjust the config for codegen, you can find generator configurable
 parameters with:
 
-    docker run -ti swaggerapi/swagger-codegen-cli:2.4.0 config-help -l python
-    docker run -ti swaggerapi/swagger-codegen-cli:2.4.0 config-help -l java
+    docker run -ti swaggerapi/swagger-codegen-cli:2.4.2 config-help -l python
+    docker run -ti swaggerapi/swagger-codegen-cli:2.4.2 config-help -l java
+    docker run -ti swaggerapi/swagger-codegen-cli:2.4.2 config-help -l rust
