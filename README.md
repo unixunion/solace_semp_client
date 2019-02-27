@@ -20,11 +20,11 @@ the version and naming them `config-java.json` and `config-python.json` respecti
 
 Build the python wheel.
 
-    cat config-python.json.template | sed 's/__VERSION__/8.3.0.32/' > config-python.json
+    cat config-python.json.template | sed 's/__VERSION__/9.0.1.7/' > config-python.json
     docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.2 generate \
       --config /src/config-python.json \
       -l python \
-      -i /src/config/8.3.0.32/semp-v2-swagger-config.yaml \
+      -i /src/config/9.0.1.7/semp-v2-swagger-config.yaml \
       -o /src/output/python
     # py2
     docker run -t -v `pwd`:/src python:2.7-slim /src/venv-wrapper.sh "cd /src/output/python && python setup.py bdist_wheel --universal"
@@ -34,38 +34,13 @@ Build the python wheel.
 You can now find the Wheel file in output/python/dist/
 
 
-### Java
+### Building
 
-If required, you can build a java version too.
+```bash
+./build.sh [java|python|rust|swift]
+```
 
-    cat config-java.json.template | sed 's/__VERSION__/8.3.0.32/' > config-java.json
-    docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.2 generate \
-      --config /src/config-java.json \
-      -l java \
-      -i /src/config/8.3.0.32/semp-v2-swagger-config.yaml \
-      -o /src/output/java
-    cd output/java
-    mvn clean / package / install / deploy
 
-### Go
-
-    cat config-go.json.template | sed 's/__VERSION__/8.3.0.32/' > config-go.json
-    docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.2 generate \
-      --config /src/config-go.json \
-      -l go \
-      -i /src/config/8.3.0.32/semp-v2-swagger-config.yaml \
-      -o /src/output/go
-    cd output/go
-
-### Rust
-
-    cat config-rust.json.template | sed 's/__VERSION__/9.0.0.17/' > config-rust.json
-    docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.2 generate \
-      --config /src/config-rust.json \
-      -l rust \
-      -i /src/config/9.0.0.17/semp-v2-swagger-config.yaml \
-      -o /src/output/rust
-    cd output/rust
 
 ## Generating Documentation
 
@@ -79,3 +54,4 @@ parameters with:
     docker run -ti swaggerapi/swagger-codegen-cli:2.4.2 config-help -l python
     docker run -ti swaggerapi/swagger-codegen-cli:2.4.2 config-help -l java
     docker run -ti swaggerapi/swagger-codegen-cli:2.4.2 config-help -l rust
+    docker run -ti swaggerapi/swagger-codegen-cli:2.4.2 config-help -l swift
