@@ -1,11 +1,27 @@
 #!/bin/bash
 
 target=$1;
+version=$2;
 
-cat config-${target}.json.template | sed 's/__VERSION__/9.0.1.7/' > config-${target}.json
+if [ "$target" == "" ]; then
+  echo "no target specified"
+  exit 1
+fi
+
+if [ "$version" == "" ]; then
+  echo "no version specified"
+  exit 1
+fi
+
+if [ ! -f "config/$version/semp-v2-swagger-config.yaml" ]; then
+  echo "no swagger spec found: config/$version/semp-v2-swagger-config.yaml"
+  exit 1
+fi
+
+cat config-${target}.json.template | sed 's/__VERSION__/${version}/' > config-${target}.json
 docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.2 generate \
     --config /src/config-${target}.json \
     -l ${target} \
-    -i /src/config/9.0.1.7/semp-v2-swagger-config.yaml \
+    -i /src/config/${version}/semp-v2-swagger-config.yaml \
     -o /src/output/${target}
 cd output/${target}

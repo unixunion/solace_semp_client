@@ -16,16 +16,11 @@ it in `config/__VERSION__/semp-v2-swagger-config.yaml`
 Create a suitable java and python config for Codegen using templates, setting
 the version and naming them `config-java.json` and `config-python.json` respectively.
 
-### Python
+### Building Python Wheel
 
 Build the python wheel.
 
-    cat config-python.json.template | sed 's/__VERSION__/9.0.1.7/' > config-python.json
-    docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.2 generate \
-      --config /src/config-python.json \
-      -l python \
-      -i /src/config/9.0.1.7/semp-v2-swagger-config.yaml \
-      -o /src/output/python
+    ./build.sh python
     # py2
     docker run -t -v `pwd`:/src python:2.7-slim /src/venv-wrapper.sh "cd /src/output/python && python setup.py bdist_wheel --universal"
     # py3
@@ -33,18 +28,11 @@ Build the python wheel.
 
 You can now find the Wheel file in output/python/dist/
 
-
 ### Building
 
 ```bash
 ./build.sh [java|python|rust|swift]
 ```
-
-
-
-## Generating Documentation
-
-
 
 ## Generator Config
 
