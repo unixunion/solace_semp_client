@@ -32,10 +32,16 @@ if [ ! -f "config/$version/semp-v2-swagger-config.yaml" ]; then
   exit 1
 fi
 
-cat config-${target}.json.template | sed 's/__VERSION__/${rewrite_version}/' > config-${target}.json
-docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.2 generate \
-    --config /src/config-${target}.json \
-    -l ${target} \
-    -i /src/config/${version}/semp-v2-swagger-config.yaml \
-    -o /src/output/${target}
-cd output/${target}
+exargs=""
+
+if [ "${target}" == "rust" ]; then
+  exargs="-t /src/swagger_templates/${target}"
+fi
+  cat config-${target}.json.template | sed "s/__VERSION__/${rewrite_version}/" > config-${target}.json
+  docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.2 generate \
+      --config /src/config-${target}.json \
+      -l ${target} \
+      -i /src/config/${version}/semp-v2-swagger-config.yaml \
+      ${exargs} \
+      -o /src/output/${target}
+  cd output/${target}
