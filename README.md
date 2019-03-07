@@ -1,26 +1,30 @@
 # Solace Semp Client
 
-Build the Solace Sempv2 API Client from OpenAPI Specifications.
+Build the Solace Sempv2 API Client from OpenAPI Spec
 
 ## Building
 
 ### Updating Semp API
 
-Download the appropriate version of the appliance sempv2 OpenAPI spec from sftp.solacesystems.com, place
-it in `config/__VERSION__/semp-v2-swagger-config.yaml`
+Download the appropriate version of the appliance SEMPv2 OpenAPI Spec from sftp.solacesystems.com, and place it in `config/__VERSION__/semp-v2-swagger-config.yaml`
 
 ## Manually
 
-### Configuring Codegen
+### Building
 
-Create a suitable java and python config for Codegen using templates, setting
-the version and naming them `config-java.json` and `config-python.json` respectively.
+Run the build script, passing in the language, semp version, and target version. 
+
+Note for rust, you need to specify a suitable target version like 9.0.1-7 due to how semver is implemented. Most other languages seem fine with 3 separator versions. 
+
+```bash
+./build.sh [java|python|rust|swift] src_version target_version
+```
 
 ### Building Python Wheel
 
 Build the python wheel.
 
-    ./build.sh python
+    ./build.sh python 9.0.1.7 9.0.1.7
     # py2
     docker run -t -v `pwd`:/src python:2.7-slim /src/venv-wrapper.sh "cd /src/output/python && python setup.py bdist_wheel --universal"
     # py3
@@ -28,11 +32,6 @@ Build the python wheel.
 
 You can now find the Wheel file in output/python/dist/
 
-### Building
-
-```bash
-./build.sh [java|python|rust|swift]
-```
 
 ## Generator Config
 
