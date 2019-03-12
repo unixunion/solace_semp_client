@@ -20,6 +20,10 @@ Note for rust, you need to specify a suitable target version like 9.0.1-7 due to
 ./build.sh [java|python|rust|swift] src_version target_version
 ```
 
+#### Rust
+
+Due to how rust implementes semver, you want to specify the target version using only 2 dot separators. e.g 9.0.1.18 becomes 9.0.1-18
+
 ### Building Python Wheel
 
 Build the python wheel.
