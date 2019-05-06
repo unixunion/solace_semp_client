@@ -7,7 +7,7 @@ rewrite_version=$3;
 usage() {
   echo "usage"
   echo "build.sh lang semp_version [rewrite_version]"
-  echo "./build.sh rust 9.0.1.7 9.0.1-7"
+  echo "./build.sh rust 9.1.0.77 9.1.0-77"
 }
 
 if [ "$target" == "" ]; then
@@ -38,6 +38,7 @@ if [ "${target}" == "rust" ]; then
   exargs="-t /src/swagger_templates/${target}"
 fi
 
+
 cat config-${target}.json.template | sed "s/__VERSION__/${rewrite_version}/" > config-${target}.json
 docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.2 generate \
     --config /src/config-${target}.json \
@@ -45,4 +46,20 @@ docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.2 generate \
     -i /src/config/${version}/semp-v2-swagger-config.yaml \
     ${exargs} \
     -o /src/output/${target}
-cd output/${target}
+#cd output/${target}
+
+if [ ! -f "config/$version/semp-v2-swagger-monitor.yaml" ]; then
+  echo "no swagger spec found: config/$version/semp-v2-swagger-monitor.yaml"
+  usage
+  exit 1
+fi
+
+cat monitor-${target}.json.template | sed "s/__VERSION__/${rewrite_version}/" > monitor-${target}.json
+docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.2 generate \
+    --config /src/monitor-${target}.json \
+    -l ${target} \
+    -i /src/config/${version}/semp-v2-swagger-monitor.yaml \
+    ${exargs} \
+    -o /src/output/${target}_monitor
+
+
