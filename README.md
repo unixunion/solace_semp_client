@@ -14,7 +14,7 @@ Download the appropriate version of the appliance SEMPv2 OpenAPI Spec from sftp.
 
 Run the build script, passing in the language, semp version, and target version. 
 
-Note for rust, you need to specify a suitable target version like 9.0.1-7 due to how semver is implemented. Most other languages seem fine with 3 separator versions. 
+Note for rust, you need to specify a suitable target version like 9.0.1-30 due to how semver is implemented. Most other languages seem fine with 3 separator versions. 
 
 ```bash
 ./build.sh [java|python|rust|swift] src_version target_version
@@ -22,13 +22,13 @@ Note for rust, you need to specify a suitable target version like 9.0.1-7 due to
 
 #### Rust
 
-Due to how rust implementes semver, you want to specify the target version using only 2 dot separators. e.g 9.0.1.18 becomes 9.0.1-18
+Due to how rust implementes semver, you want to specify the target version using only 2 dot separators. e.g 9.0.1.30 becomes 9.0.1-30
 
 ### Building Python Wheel
 
 Build the python wheel.
 
-    ./build.sh python 9.0.1.7 9.0.1.7
+    ./build.sh python 9.0.1.30 9.0.1.30
     # py2
     docker run -t -v `pwd`:/src python:2.7-slim /src/venv-wrapper.sh "cd /src/output/python && python setup.py bdist_wheel --universal"
     # py3
