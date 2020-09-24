@@ -22,7 +22,9 @@ Note for rust, you need to specify a suitable target version like 9.0.1-30 due t
 
 #### Rust
 
-Due to how rust implementes semver, you want to specify the target version using only 2 dot separators. e.g 9.0.1.30 becomes 9.0.1-30
+Due to how rust implements semver, you want to specify the target version using only 2 dot separators. e.g 9.0.1.30 becomes 9.0.1-30
+
+    ./build.sh rust 9.5.0.30 9.5.0-30  
 
 ### Building Python Wheel
 

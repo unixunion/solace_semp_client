@@ -2,5 +2,5 @@
   "projectName": "solace_semp_client_monitor",
   "packageName": "solace_semp_client_monitor",
   "packageVersion": "__VERSION__",
-  "packageUrl": "https://github.com/unixunion/solace_semp_client.git"
+  "packageUrl": "https://github.com/unixunion/rust_solace_semp_client_monitor.git"
 }

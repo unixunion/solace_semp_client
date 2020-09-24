@@ -1,6 +1,6 @@
 {
   "artifactDescription": "Solace SEMPv2 Client",
-  "groupId": "com.myorg.bds",
+  "groupId": "com.unixunion.tig",
   "artifactId": "solace_semp_client",
   "artifactVersion": "__VERSION__"
 }

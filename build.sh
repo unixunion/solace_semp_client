@@ -40,26 +40,32 @@ fi
 
 
 cat config-${target}.json.template | sed "s/__VERSION__/${rewrite_version}/" > config-${target}.json
-docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.2 generate \
+docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.15 generate \
     --config /src/config-${target}.json \
     -l ${target} \
     -i /src/config/${version}/semp-v2-swagger-config.yaml \
     ${exargs} \
     -o /src/output/${target}
-#cd output/${target}
 
-if [ ! -f "config/$version/semp-v2-swagger-monitor.yaml" ]; then
-  echo "no swagger spec found: config/$version/semp-v2-swagger-monitor.yaml"
-  usage
-  exit 1
+if [ -f "config/$version/semp-v2-swagger-monitor.yaml" ]; then
+
+  cat monitor-${target}.json.template | sed "s/__VERSION__/${rewrite_version}/" > monitor-${target}.json
+  docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.15 generate \
+      --config /src/monitor-${target}.json \
+      -l ${target} \
+      -i /src/config/${version}/semp-v2-swagger-monitor.yaml \
+      ${exargs} \
+      -o /src/output/${target}_monitor
+
 fi
 
-cat monitor-${target}.json.template | sed "s/__VERSION__/${rewrite_version}/" > monitor-${target}.json
-docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.2 generate \
-    --config /src/monitor-${target}.json \
-    -l ${target} \
-    -i /src/config/${version}/semp-v2-swagger-monitor.yaml \
-    ${exargs} \
-    -o /src/output/${target}_monitor
+if [ -f "config/$version/semp-v2-swagger-action.yaml" ]; then
+  cat action-${target}.json.template | sed "s/__VERSION__/${rewrite_version}/" > action-${target}.json
+  docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.15 generate \
+      --config /src/action-${target}.json \
+      -l ${target} \
+      -i /src/config/${version}/semp-v2-swagger-action.yaml \
+      ${exargs} \
+      -o /src/output/${target}_action
 
-
+fi
