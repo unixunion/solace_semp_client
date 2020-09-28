@@ -38,14 +38,13 @@ if [ "${target}" == "rust" ]; then
   exargs="-t /src/swagger_templates/${target}"
 fi
 
-
 cat config-${target}.json.template | sed "s/__VERSION__/${rewrite_version}/" > config-${target}.json
 docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.15 generate \
     --config /src/config-${target}.json \
     -l ${target} \
     -i /src/config/${version}/semp-v2-swagger-config.yaml \
     ${exargs} \
-    -o /src/output/${target}
+    -o /src/output/${target}_config
 
 if [ -f "config/$version/semp-v2-swagger-monitor.yaml" ]; then
 
