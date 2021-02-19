@@ -39,7 +39,7 @@ if [ "${target}" == "rust" ]; then
 fi
 
 cat config-${target}.json.template | sed "s/__VERSION__/${rewrite_version}/" > config-${target}.json
-docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.15 generate \
+docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:latest generate \
     --config /src/config-${target}.json \
     -l ${target} \
     -i /src/config/${version}/semp-v2-swagger-config.yaml \
@@ -49,7 +49,7 @@ docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.15 generate \
 if [ -f "config/$version/semp-v2-swagger-monitor.yaml" ]; then
 
   cat monitor-${target}.json.template | sed "s/__VERSION__/${rewrite_version}/" > monitor-${target}.json
-  docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.15 generate \
+  docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:latest generate \
       --config /src/monitor-${target}.json \
       -l ${target} \
       -i /src/config/${version}/semp-v2-swagger-monitor.yaml \
@@ -60,7 +60,7 @@ fi
 
 if [ -f "config/$version/semp-v2-swagger-action.yaml" ]; then
   cat action-${target}.json.template | sed "s/__VERSION__/${rewrite_version}/" > action-${target}.json
-  docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.15 generate \
+  docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:latest generate \
       --config /src/action-${target}.json \
       -l ${target} \
       -i /src/config/${version}/semp-v2-swagger-action.yaml \

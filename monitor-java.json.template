@@ -1,7 +1,8 @@
 {
   "artifactDescription": "Solace SEMPv2 Client",
   "groupId": "com.kindredgroup.solace",
-  "artifactId": "solace_semp_client",
+  "artifactId": "solace_semp_client_monitor",
   "artifactVersion": "__VERSION__",
-  "serializableModel": true
+  "serializableModel": true,
+  "asyncNative": true
 }
