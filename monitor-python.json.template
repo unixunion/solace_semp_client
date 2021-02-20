@@ -1,6 +1,6 @@
 {
-  "projectName": "solace_semp_client",
-  "packageName": "solace_semp_client",
+  "projectName": "solace_semp_monitor",
+  "packageName": "solace_semp_monitor",
   "packageVersion": "__VERSION__",
   "packageUrl": "https://github.com/unixunion/solace_semp_client.git"
 }
