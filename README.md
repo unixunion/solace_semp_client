@@ -34,7 +34,7 @@ Build the python wheel.
     # py2
     docker run -t -v `pwd`:/src python:2.7-slim /src/venv-wrapper.sh "cd /src/output/python && python setup.py bdist_wheel --universal"
     # py3
-    docker run -t -v `pwd`:/src python:3-slim /src/venv-wrapper.sh "cd /src/output/python && python setup.py bdist_wheel --universal"
+    docker run -t -v `pwd`:/src python:3-slim /src/venv-wrapper.sh "cd /src/output/python_config && python setup.py bdist_wheel --universal"
 
 You can now find the Wheel file in output/python/dist/
 

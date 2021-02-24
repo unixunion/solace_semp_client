@@ -44,7 +44,7 @@ docker run -v `pwd`:/src swaggerapi/swagger-codegen-cli:2.4.13 generate \
     -l ${target} \
     -i /src/config/${version}/semp-v2-swagger-config.yaml \
     ${exargs} \
-    -o /src/output/${target}_config
+    -o /src/output/${version}/${target}_config
 
 if [ -f "config/$version/semp-v2-swagger-monitor.yaml" ]; then
 
@@ -54,7 +54,7 @@ if [ -f "config/$version/semp-v2-swagger-monitor.yaml" ]; then
       -l ${target} \
       -i /src/config/${version}/semp-v2-swagger-monitor.yaml \
       ${exargs} \
-      -o /src/output/${target}_monitor
+      -o /src/output/${version}/${target}_monitor
 
 fi
 
@@ -65,6 +65,13 @@ if [ -f "config/$version/semp-v2-swagger-action.yaml" ]; then
       -l ${target} \
       -i /src/config/${version}/semp-v2-swagger-action.yaml \
       ${exargs} \
-      -o /src/output/${target}_action
+      -o /src/output/${version}/${target}_action
 
+fi
+
+if [ "$target" == "python" ]; then
+  for module in output/${version}/*; do
+    echo $module
+    docker run -t -v `pwd`:/src python:3-slim /src/venv-wrapper.sh "cd /src/$module && python setup.py bdist_wheel --universal"
+  done
 fi
