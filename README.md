@@ -48,3 +48,12 @@ parameters with:
     docker run -ti swaggerapi/swagger-codegen-cli:2.4.2 config-help -l java
     docker run -ti swaggerapi/swagger-codegen-cli:2.4.2 config-help -l rust
     docker run -ti swaggerapi/swagger-codegen-cli:2.4.2 config-help -l swift
+
+
+## Building and Releasing all Python Wheel artefacts
+
+    ls config | xargs -I@ -t docker build --build-arg upload=1 --build-arg sempver=@ -t unixunion/disposable:dev-@ .
+
+### Getting all SEMPv2 client whl files
+
+    ls config | xargs -I@ -t docker create unixunion/disposable:dev-@ | xargs -I@ docker cp @:/tmp output
