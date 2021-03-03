@@ -2,8 +2,6 @@
 
 Build the Solace Sempv2 API Client from OpenAPI Spec
 
-## Building
-
 ### Updating SEMP API OpenAPI Spec
 
 Download the appropriate version of the appliance SEMPv2 OpenAPI Spec from sftp.solacesystems.com, and place it in 
@@ -13,9 +11,9 @@ Download the appropriate version of the appliance SEMPv2 OpenAPI Spec from sftp.
 * config/__VERSION__/semp-v2-swagger-monitor.yaml
 
 
-### Building
+## Building
 
-Run the build script, passing in the language, SEMP version, and target version. 
+Run the build script, passing in the language, SEMP version, and optionally, the target version. 
 
 Note for rust, you need to specify a suitable target version like 9.0.1-30 due to how semver is implemented. Most other 
 languages seem fine with 3 separator versions. 
@@ -24,13 +22,24 @@ languages seem fine with 3 separator versions.
 ./build.sh [java|python|rust|swift] src_version target_version
 ```
 
-#### Rust
+### Rust
 
 Due to how rust implements semver, you want to specify the target version using only 2 dot separators. e.g 9.0.1.30 becomes 9.0.1-30
 
     ./build.sh rust 9.5.0.30 9.5.0-30  
 
-### Python Via Docker Run
+### Python
+
+Building with system python/venv
+
+    python3 -mvenv venv3
+    pip install wheel
+    source venv3/bin/activate
+    ./build.sh python 9.8.0.12
+    cd output/9.8.0.12/python_config
+    python setup.py  bdist_wheel --universal
+    
+#### Python Via Docker Run
 
 Build the python wheel.
 
@@ -61,12 +70,11 @@ You can now find the Wheel files output/VERSION/python_[action|config|monitor]/d
 
     ls config | xargs -I@ -t docker build --build-arg upload=1 --build-arg sempver=@ -t unixunion/disposable:dev-@ .
 
-### Getting all SEMPv2 client whl files
+#### Getting all SEMPv2 client whl files
 
 After running above, you can extract ALL wheel files with: 
 
     ls config | xargs -I@ -t docker create unixunion/disposable:dev-@ | xargs -I@ docker cp @:/tmp output
-
 
 ## Generator Configs
 
